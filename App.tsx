@@ -10,7 +10,12 @@ import {
   Dimensions,
   TouchableHighlight,
 } from "react-native";
-import { Ionicons, Entypo, MaterialIcons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  Entypo,
+  MaterialIcons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { OpenSans_700Bold } from "@expo-google-fonts/open-sans";
 
 import * as SplashScreen from "expo-splash-screen";
@@ -55,9 +60,9 @@ export default function App() {
           options={{
             header: () => (
               <View style={styles.header}>
-                <MaterialIcons
+                <MaterialCommunityIcons
                   style={styles.icon}
-                  name="voice-chat"
+                  name="message-draw"
                   size={40}
                   color="white"
                 />

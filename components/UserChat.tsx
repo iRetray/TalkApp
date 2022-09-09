@@ -4,6 +4,7 @@ import {
   View,
   Dimensions,
   Image,
+  Button,
   TouchableHighlight,
 } from "react-native";
 
@@ -20,11 +21,29 @@ import {
   OpenSans_800ExtraBold_Italic,
 } from "@expo-google-fonts/open-sans";
 import { useFonts } from "expo-font";
+import { Colors } from "../constants";
+
+import moment from "moment";
 
 const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
 
-const UserChat = () => {
+type UserChatProps = {
+  navigation: any;
+  name: string;
+  picture: string;
+  lastMessage: string;
+  hour: number;
+  countMessages: number;
+};
+
+export const UserChat = ({
+  navigation,
+  name,
+  picture,
+  lastMessage,
+  hour,
+  countMessages,
+}: UserChatProps) => {
   const [areFontsLoaded] = useFonts({
     OpenSans_300Light,
     OpenSans_300Light_Italic,
@@ -43,18 +62,27 @@ const UserChat = () => {
   }
 
   return (
-    <TouchableHighlight onPress={() => console.log("touchs me")}>
+    <TouchableHighlight
+      underlayColor={Colors.primaryLight}
+      onPress={() => navigation.navigate("UniqueChat")}
+    >
       <View style={styles.container}>
         <Image
           style={styles.profilePicture}
           source={{
-            uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMHBob3RvfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+            uri: picture,
           }}
         />
         <View>
-          <Text style={styles.userName}>Maria Cristina</Text>
-          <Text style={styles.message}>Hola Daniel, ¿nos vemos hoy?</Text>
-          <Text style={styles.hour}>2:43 pm</Text>
+          <View style={styles.userNameContainer}>
+            <Text style={styles.userName}>{name}</Text>
+            <View style={styles.dot} />
+          </View>
+          <Text style={styles.message}>{lastMessage}</Text>
+          <Text style={styles.hour}>{moment(hour).format("h:mm a")}</Text>
+        </View>
+        <View style={styles.countMessages}>
+          <Text style={styles.number}>{countMessages}</Text>
         </View>
       </View>
     </TouchableHighlight>
@@ -70,8 +98,8 @@ const styles = StyleSheet.create({
     alignContent: "flex-start",
     alignSelf: "flex-start",
     height: 100,
-    backgroundColor: "red",
     alignItems: "center",
+    position: "relative",
   },
   profilePicture: {
     width: 80,
@@ -80,18 +108,48 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginHorizontal: 10,
   },
+  userNameContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
   userName: {
     fontSize: 20,
+    marginRight: 5,
     fontFamily: "OpenSans_600SemiBold",
+  },
+  dot: {
+    backgroundColor: Colors.success,
+    height: 10,
+    width: 10,
+    borderRadius: 50,
   },
   message: {
     fontSize: 14,
+    maxWidth: 220,
     fontFamily: "OpenSans_400Regular",
   },
   hour: {
     fontSize: 12,
     fontFamily: "OpenSans_300Light",
   },
+  countMessages: {
+    position: "absolute",
+    backgroundColor: Colors.alert,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    top: 0,
+    right: 0,
+    marginRight: 20,
+    marginTop: 40,
+    height: 22,
+    width: 22,
+    borderRadius: 50,
+  },
+  number: {
+    color: "white",
+    fontSize: 12,
+    fontFamily: "OpenSans_600SemiBold",
+  },
 });
-
-export default UserChat;

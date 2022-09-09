@@ -1,57 +1,139 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
+import { useEffect } from "react";
 
-import UserChat from "./components/UserChat";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableHighlight,
+} from "react-native";
+import { Ionicons, Entypo, MaterialIcons } from "@expo/vector-icons";
+import { OpenSans_700Bold } from "@expo-google-fonts/open-sans";
+
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
+
+import { Colors } from "./constants";
+
+import { ChatsList } from "./pages/ChatsList";
 
 const width = Dimensions.get("window").width;
 
+const Stack = createNativeStackNavigator();
+
+/* TODO: Create this component in other file */
+const UniqueChat = () => {
+  return <Text>Hola</Text>;
+};
+
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+  const [areFontsLoaded] = useFonts({ OpenSans_700Bold });
+
+  useEffect(() => {
+    hideSplashScreen();
+  }, [areFontsLoaded]);
+
+  const hideSplashScreen = async () => {
+    if (areFontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  };
+
+  if (!areFontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>TalkApp</Text>
-      </View>
-      <UserChat />
-      <TouchableOpacity
-        onPress={() => console.log("hola")}
-        style={styles.button}
-      >
-        <Text style={styles.buttonLabel}>La buena</Text>
-      </TouchableOpacity>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{
+            header: () => (
+              <View style={styles.header}>
+                <MaterialIcons
+                  style={styles.icon}
+                  name="voice-chat"
+                  size={40}
+                  color="white"
+                />
+                <Text style={styles.textHeader}>TalkApp</Text>
+                <View style={styles.configuration}>
+                  <TouchableHighlight
+                    underlayColor={Colors.primaryDark}
+                    style={styles.touchableButton}
+                    onPress={() => null}
+                  >
+                    <Ionicons
+                      name="md-settings-sharp"
+                      size={24}
+                      color="white"
+                    />
+                  </TouchableHighlight>
+                </View>
+                <View style={styles.newChat}>
+                  <TouchableHighlight
+                    underlayColor={Colors.primaryDark}
+                    style={styles.touchableButton}
+                    onPress={() => null}
+                  >
+                    <Entypo name="new-message" size={24} color="white" />
+                  </TouchableHighlight>
+                </View>
+              </View>
+            ),
+          }}
+          name="TalkApp"
+          component={ChatsList}
+        />
+        {/* TODO: Design the secondary screen */}
+        <Stack.Screen name="UniqueChat" component={UniqueChat} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-  },
   header: {
     width: width,
-    height: 50,
-    backgroundColor: "purple",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.primary,
+    paddingTop: 35,
+    paddingBottom: 15,
+    position: "relative",
   },
-  mainLabel: {
+  icon: {
+    marginTop: 10,
+  },
+  textHeader: {
+    marginLeft: 10,
     fontSize: 30,
-    fontWeight: "bold",
+    color: "white",
+    fontFamily: "OpenSans_700Bold",
   },
-  button: {
-    marginTop: 15,
-    backgroundColor: "#3F8CFF",
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+  configuration: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    marginTop: 40,
+    marginRight: 10,
   },
-  buttonLabel: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
+  touchableButton: {
+    padding: 10,
+    borderRadius: 50,
+  },
+  newChat: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    marginTop: 40,
+    marginLeft: 15,
   },
 });

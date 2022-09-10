@@ -1,5 +1,4 @@
 {
-  "buildType": "apk",
   "cli": {
     "version": ">= 2.1.0"
   },

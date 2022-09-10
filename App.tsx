@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.primary,
-    paddingTop: 35,
+    paddingTop: 15,
     paddingBottom: 15,
     position: "relative",
   },
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     right: 0,
-    marginTop: 40,
+    marginTop: 25,
     marginRight: 10,
   },
   touchableButton: {
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     left: 0,
-    marginTop: 40,
+    marginTop: 25,
     marginLeft: 15,
   },
 });

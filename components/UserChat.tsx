@@ -64,7 +64,7 @@ export const UserChat = ({
   return (
     <TouchableHighlight
       underlayColor={Colors.primaryLight}
-      onPress={() => navigation.navigate("UniqueChat")}
+      onPress={() => navigation.navigate("SingleChat", { name, picture })}
     >
       <View style={styles.container}>
         <Image

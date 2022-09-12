@@ -1,14 +1,4 @@
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Dimensions,
-  FlatList,
-} from "react-native";
-
-import { OpenSans_600SemiBold } from "@expo-google-fonts/open-sans";
-import { useFonts } from "expo-font";
+import { View, Text, TextInput, StyleSheet, FlatList } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
 
@@ -123,14 +113,6 @@ const chatsList = [
 ];
 
 export const ChatsList = ({ navigation }: any) => {
-  const [areFontsLoaded] = useFonts({
-    OpenSans_600SemiBold,
-  });
-
-  if (!areFontsLoaded) {
-    return <Text>Cargando</Text>;
-  }
-
   return (
     <FlatList
       data={chatsList}

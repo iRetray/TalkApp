@@ -4,23 +4,8 @@ import {
   View,
   Dimensions,
   Image,
-  Button,
   TouchableHighlight,
 } from "react-native";
-
-import {
-  OpenSans_300Light,
-  OpenSans_300Light_Italic,
-  OpenSans_400Regular,
-  OpenSans_400Regular_Italic,
-  OpenSans_600SemiBold,
-  OpenSans_600SemiBold_Italic,
-  OpenSans_700Bold,
-  OpenSans_700Bold_Italic,
-  OpenSans_800ExtraBold,
-  OpenSans_800ExtraBold_Italic,
-} from "@expo-google-fonts/open-sans";
-import { useFonts } from "expo-font";
 import { Colors } from "../constants";
 
 import moment from "moment";
@@ -44,23 +29,6 @@ export const UserChat = ({
   hour,
   countMessages,
 }: UserChatProps) => {
-  const [areFontsLoaded] = useFonts({
-    OpenSans_300Light,
-    OpenSans_300Light_Italic,
-    OpenSans_400Regular,
-    OpenSans_400Regular_Italic,
-    OpenSans_600SemiBold,
-    OpenSans_600SemiBold_Italic,
-    OpenSans_700Bold,
-    OpenSans_700Bold_Italic,
-    OpenSans_800ExtraBold,
-    OpenSans_800ExtraBold_Italic,
-  });
-
-  if (!areFontsLoaded) {
-    return <Text>Cargando</Text>;
-  }
-
   return (
     <TouchableHighlight
       underlayColor={Colors.primaryLight}

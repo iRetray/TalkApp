@@ -25,10 +25,6 @@ const width = Dimensions.get("window").width;
 
 const Stack = createNativeStackNavigator();
 
-const SingleChatPage = ({ route, navigation }: any) => (
-  <SingleChat navigation={navigation} {...route.params} />
-);
-
 export default function App() {
   return (
     <FontsLoader>
@@ -75,6 +71,7 @@ export default function App() {
           />
           <Stack.Screen
             options={{
+              animation: "slide_from_right",
               header: ({ navigation, route }: NativeStackHeaderProps) => {
                 const { name, picture }: UserType = route.params;
                 return (
@@ -118,7 +115,7 @@ export default function App() {
               },
             }}
             name="SingleChat"
-            component={SingleChatPage}
+            component={SingleChat}
           />
         </Stack.Navigator>
       </NavigationContainer>

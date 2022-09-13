@@ -21,11 +21,7 @@ type SingleChatProps = {
   picture: string;
 };
 
-export const SingleChat = ({
-  navigation,
-  name,
-  picture,
-}: SingleChatProps): JSX.Element => {
+export const SingleChat = (): JSX.Element => {
   const [message, setMessage] = useState("");
 
   return (

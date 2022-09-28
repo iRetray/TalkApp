@@ -1,27 +1,16 @@
+import { useState } from "react";
+
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   Dimensions,
   TextInput,
   TouchableHighlight,
 } from "react-native";
-import { Colors } from "../constants";
-
-import {
-  OpenSans_300Light,
-  OpenSans_500Medium,
-  OpenSans_700Bold,
-} from "@expo-google-fonts/open-sans";
-
-import * as SplashScreen from "expo-splash-screen";
-import { useFonts } from "expo-font";
-
 import { AntDesign, FontAwesome5, Ionicons } from "@expo/vector-icons";
-import { useState, useEffect } from "react";
 
-SplashScreen.preventAutoHideAsync();
+import { Colors } from "../constants";
 
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
@@ -32,32 +21,8 @@ type SingleChatProps = {
   picture: string;
 };
 
-export const SingleChat = ({
-  navigation,
-  name,
-  picture,
-}: SingleChatProps): JSX.Element => {
+export const SingleChat = (): JSX.Element => {
   const [message, setMessage] = useState("");
-
-  const [areFontsLoaded] = useFonts({
-    OpenSans_300Light,
-    OpenSans_500Medium,
-    OpenSans_700Bold,
-  });
-
-  useEffect(() => {
-    hideSplashScreen();
-  }, [areFontsLoaded]);
-
-  const hideSplashScreen = async () => {
-    if (areFontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  };
-
-  if (!areFontsLoaded) {
-    return null;
-  }
 
   return (
     <View style={styles.container}>
